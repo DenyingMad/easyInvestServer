@@ -4,10 +4,7 @@ import com.cgpanda.EasyInvestServer.entity.Episode;
 import com.cgpanda.EasyInvestServer.entity.Story;
 import com.cgpanda.EasyInvestServer.service.StoryService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -47,6 +44,16 @@ public class ReqController {
         for (Story story : storyList){
             episodes.addAll(story.getEpisodes());
         }
+        return episodes;
+    }
+
+
+    @RequestMapping(value = "/episodes/{id}", method = RequestMethod.GET)
+    @ResponseBody
+    public List<Episode> getEpisodes(@PathVariable("id") long story_id){
+        List<Episode> episodes = new ArrayList<>();
+        Story story = service.getOne(story_id);
+        episodes.addAll(story.getEpisodes());
         return episodes;
     }
 }

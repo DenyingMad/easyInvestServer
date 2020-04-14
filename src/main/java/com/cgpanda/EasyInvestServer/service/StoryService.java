@@ -7,4 +7,6 @@ import java.util.List;
 
 public interface StoryService {
     List<Story> getAll();
+
+    Story getOne(long story_id);
 }

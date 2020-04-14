@@ -14,20 +14,19 @@ import java.util.List;
 import java.util.Set;
 
 @RestController
-@RequestMapping("/")
 public class ReqController {
 
     @Autowired
     private StoryService service;
 
-    @RequestMapping("test")
+    @RequestMapping("/")
     @ResponseBody
     public String test(){
         return "Server working";
     }
 
 
-    @RequestMapping("stories")
+    @RequestMapping("/stories")
     @ResponseBody
     public List<Story> getAll(){
         List<Story> storyList = service.getAll();
@@ -35,7 +34,7 @@ public class ReqController {
         return storyList;
     }
 
-    @RequestMapping("ep")
+    @RequestMapping("/ep")
     @ResponseBody
     public List<Episode> getEpisodes(){
         List<Episode> episodes = new ArrayList<>();

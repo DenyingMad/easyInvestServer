@@ -35,14 +35,14 @@ public class ReqController {
         return storyList;
     }
 
-//    @RequestMapping("ep")
-//    @ResponseBody
-//    public List<Episode> getEpisodes(){
-//        List<Episode> episodes = new ArrayList<>();
-//        List<Story> storyList = service.getAll();
-//        for (Story story : storyList){
-//            episodes.addAll(story.getEpisodes());
-//        }
-//        return episodes;
-//    }
+    @RequestMapping("ep")
+    @ResponseBody
+    public List<Episode> getEpisodes(){
+        List<Episode> episodes = new ArrayList<>();
+        List<Story> storyList = service.getAll();
+        for (Story story : storyList){
+            episodes.addAll(story.getEpisodes());
+        }
+        return episodes;
+    }
 }

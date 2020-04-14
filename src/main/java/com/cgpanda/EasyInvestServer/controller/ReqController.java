@@ -29,8 +29,14 @@ public class ReqController {
 
     @RequestMapping(value = "/stories", method = RequestMethod.GET)
     @ResponseBody
-    public List<Story> getAll(){
-        return service.getAll();
+    public List<Story> getAllStories(){
+
+        List<Story> storyList = service.getAll();
+        for (Story story : storyList){
+            story.setEpisodes(null);
+        }
+
+        return storyList;
     }
 
     @RequestMapping(value = "/ep", method = RequestMethod.GET)

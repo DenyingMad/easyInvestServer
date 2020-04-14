@@ -5,6 +5,7 @@ import com.cgpanda.EasyInvestServer.entity.Story;
 import com.cgpanda.EasyInvestServer.service.StoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -14,6 +15,7 @@ import java.util.List;
 import java.util.Set;
 
 @RestController
+@RequestMapping("/")
 public class ReqController {
 
     @Autowired
@@ -25,16 +27,13 @@ public class ReqController {
         return "Server working";
     }
 
-
-    @RequestMapping("/stories")
+    @RequestMapping(value = "/stories", method = RequestMethod.GET)
     @ResponseBody
     public List<Story> getAll(){
-        List<Story> storyList = service.getAll();
-
-        return storyList;
+        return service.getAll();
     }
 
-    @RequestMapping("/ep")
+    @RequestMapping(value = "/ep", method = RequestMethod.GET)
     @ResponseBody
     public List<Episode> getEpisodes(){
         List<Episode> episodes = new ArrayList<>();

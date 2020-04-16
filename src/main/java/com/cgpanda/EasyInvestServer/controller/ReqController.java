@@ -1,22 +1,24 @@
 package com.cgpanda.EasyInvestServer.controller;
 
 import com.cgpanda.EasyInvestServer.entity.Episode;
+import com.cgpanda.EasyInvestServer.entity.Equity;
 import com.cgpanda.EasyInvestServer.entity.Story;
+import com.cgpanda.EasyInvestServer.service.EquityService;
 import com.cgpanda.EasyInvestServer.service.StoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 @RestController
 @RequestMapping("/")
 public class ReqController {
 
     @Autowired
-    private StoryService service;
+    private StoryService storyService;
+    @Autowired
+    private EquityService equityService;
 
     @RequestMapping("/")
     @ResponseBody
@@ -28,11 +30,8 @@ public class ReqController {
     @ResponseBody
     public List<Story> getAllStories(){
 
-        List<Story> storyList = service.getAll();
-        for (Story story : storyList){
-            story.setEpisodes(null);
-        }
-
+        List<Story> storyList = storyService.getAll();
+        storyList.forEach(story -> story.setEpisodes(null));
         return storyList;
     }
 
@@ -40,10 +39,8 @@ public class ReqController {
     @ResponseBody
     public List<Episode> getEpisodes(){
         List<Episode> episodes = new ArrayList<>();
-        List<Story> storyList = service.getAll();
-        for (Story story : storyList){
-            episodes.addAll(story.getEpisodes());
-        }
+        List<Story> storyList = storyService.getAll();
+        storyList.forEach( story -> episodes.addAll(story.getEpisodes()));
         return episodes;
     }
 
@@ -51,9 +48,13 @@ public class ReqController {
     @RequestMapping(value = "/episodes/{id}", method = RequestMethod.GET)
     @ResponseBody
     public List<Episode> getEpisodes(@PathVariable("id") long story_id){
-        List<Episode> episodes = new ArrayList<>();
-        Story story = service.getOne(story_id);
-        episodes.addAll(story.getEpisodes());
-        return episodes;
+        Story story = storyService.getOne(story_id);
+        return new ArrayList<>(story.getEpisodes());
+    }
+
+    @RequestMapping(value = "/equities", method = RequestMethod.GET)
+    @ResponseBody
+    public List<Equity> getAllEquities(){
+        return equityService.getAll();
     }
 }

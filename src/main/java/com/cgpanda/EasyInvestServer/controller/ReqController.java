@@ -1,8 +1,10 @@
 package com.cgpanda.EasyInvestServer.controller;
 
+import com.cgpanda.EasyInvestServer.entity.Article;
 import com.cgpanda.EasyInvestServer.entity.Episode;
 import com.cgpanda.EasyInvestServer.entity.Equity;
 import com.cgpanda.EasyInvestServer.entity.Story;
+import com.cgpanda.EasyInvestServer.service.ArticleService;
 import com.cgpanda.EasyInvestServer.service.EquityService;
 import com.cgpanda.EasyInvestServer.service.StoryService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +21,8 @@ public class ReqController {
     private StoryService storyService;
     @Autowired
     private EquityService equityService;
+    @Autowired
+    private ArticleService articleService;
 
     @RequestMapping("/")
     @ResponseBody
@@ -56,5 +60,10 @@ public class ReqController {
     @ResponseBody
     public List<Equity> getAllEquities(){
         return equityService.getAll();
+    }
+
+    @RequestMapping(value = "/news", method = RequestMethod.GET)
+    public List<Article> getAllArticles(){
+        return articleService.getAll();
     }
 }

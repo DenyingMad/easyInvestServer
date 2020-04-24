@@ -20,10 +20,12 @@ public class StoriesController {
     @RequestMapping(value = "/featured", method = RequestMethod.GET)
     @ResponseBody
     public List<Story> getFeaturedStories(){
-        return service.getFeatured();
+        List<Story> storyList = service.getFeatured();
+        storyList.forEach(story -> story.setEpisodes(null));
+        return storyList;
     }
 
-    @RequestMapping(value = "", method = RequestMethod.GET)
+    @RequestMapping(value = "/", method = RequestMethod.GET)
     @ResponseBody
     public List<Story> getAllStories(){
 

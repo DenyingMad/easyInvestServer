@@ -1,14 +1,12 @@
-package com.cgpanda.EasyInvestServer.entity;
+package com.cgpanda.EasyInvestServer.entity.stories;
 
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
 
 import javax.persistence.*;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
@@ -28,9 +26,29 @@ public class Story {
     @Column(name = "story_image")
     private String story_image;
 
+    @Column(name = "is_featured")
+    private boolean isFeatured;
+
     @OneToMany(mappedBy = "story", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
     @LazyCollection(LazyCollectionOption.TRUE)
     private List<Episode> episodes;
+
+    @ManyToMany
+    @JoinTable(
+            name = "story_category",
+            joinColumns = @JoinColumn(name = "story_id"),
+            inverseJoinColumns = @JoinColumn(name = "category_id")
+    )
+    Set<StoryCategory> categories;
+
+    @JsonManagedReference
+    public Set<StoryCategory> getCategories() {
+        return categories;
+    }
+
+    public void setCategories(Set<StoryCategory> categories) {
+        this.categories = categories;
+    }
 
     @JsonManagedReference
     public List<Episode> getEpisodes() {
@@ -72,5 +90,13 @@ public class Story {
 
     public void setStory_image(String story_image) {
         this.story_image = story_image;
+    }
+
+    public boolean isFeatured() {
+        return isFeatured;
+    }
+
+    public void setFeatured(boolean featured) {
+        isFeatured = featured;
     }
 }

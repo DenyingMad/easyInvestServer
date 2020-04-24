@@ -1,8 +1,7 @@
-package com.cgpanda.EasyInvestServer.entity;
+package com.cgpanda.EasyInvestServer.entity.stories;
 
+import com.cgpanda.EasyInvestServer.entity.stories.Story;
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;

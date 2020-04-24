@@ -1,7 +1,6 @@
 package com.cgpanda.EasyInvestServer.service;
 
-import com.cgpanda.EasyInvestServer.entity.Episode;
-import com.cgpanda.EasyInvestServer.entity.Story;
+import com.cgpanda.EasyInvestServer.entity.stories.Story;
 import com.cgpanda.EasyInvestServer.repository.StoriesRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -17,6 +16,11 @@ public class StoryServiceImpl implements StoryService {
     @Override
     public List<Story> getAll() {
         return storiesRepository.findAll();
+    }
+
+    @Override
+    public List<Story> getFeatured() {
+        return storiesRepository.findAllFeatured();
     }
 
     @Override

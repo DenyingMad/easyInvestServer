@@ -1,9 +1,9 @@
 package com.cgpanda.EasyInvestServer.controller;
 
 import com.cgpanda.EasyInvestServer.entity.Article;
-import com.cgpanda.EasyInvestServer.entity.Episode;
+import com.cgpanda.EasyInvestServer.entity.stories.Episode;
 import com.cgpanda.EasyInvestServer.entity.Equity;
-import com.cgpanda.EasyInvestServer.entity.Story;
+import com.cgpanda.EasyInvestServer.entity.stories.Story;
 import com.cgpanda.EasyInvestServer.service.ArticleService;
 import com.cgpanda.EasyInvestServer.service.EquityService;
 import com.cgpanda.EasyInvestServer.service.StoryService;

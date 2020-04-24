@@ -30,14 +30,7 @@ public class ReqController {
         return "Server working";
     }
 
-    @RequestMapping(value = "/stories", method = RequestMethod.GET)
-    @ResponseBody
-    public List<Story> getAllStories(){
 
-        List<Story> storyList = storyService.getAll();
-        storyList.forEach(story -> story.setEpisodes(null));
-        return storyList;
-    }
 
     @RequestMapping(value = "/ep", method = RequestMethod.GET)
     @ResponseBody

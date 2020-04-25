@@ -33,7 +33,7 @@ public class Story {
     @LazyCollection(LazyCollectionOption.TRUE)
     private List<Episode> episodes;
 
-    @ManyToMany(mappedBy = "stories")
+    @ManyToMany
     @JoinTable(
             name = "story_category",
             joinColumns = @JoinColumn(name = "story_id"),

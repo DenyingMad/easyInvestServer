@@ -19,11 +19,6 @@ public class StoryCategory {
     private String categoryName;
 
     @ManyToMany(mappedBy = "categories")
-    @JoinTable(
-            name = "story_category",
-            joinColumns = @JoinColumn(name = "category_id"),
-            inverseJoinColumns = @JoinColumn(name = "story_id")
-    )
     private Set<Story> stories;
 
     public long getId() {

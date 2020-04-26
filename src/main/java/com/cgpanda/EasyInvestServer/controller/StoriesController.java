@@ -1,14 +1,13 @@
 package com.cgpanda.EasyInvestServer.controller;
 
+import com.cgpanda.EasyInvestServer.entity.stories.Episode;
 import com.cgpanda.EasyInvestServer.entity.stories.Story;
 import com.cgpanda.EasyInvestServer.entity.stories.StoryCategory;
 import com.cgpanda.EasyInvestServer.service.StoryService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -39,5 +38,22 @@ public class StoriesController {
     @ResponseBody
     public List<StoryCategory> getAllStoriesByCategory(){
         return service.getCategories();
+    }
+
+//    @RequestMapping(value = "/episodes", method = RequestMethod.GET)
+//    @ResponseBody
+//    public List<Episode> getEpisodes(){
+//        List<Episode> episodes = new ArrayList<>();
+//        List<Story> storyList = service.getAll();
+//        storyList.forEach( story -> episodes.addAll(story.getEpisodes()));
+//        return episodes;
+//    }
+
+
+    @RequestMapping(value = "/episodes/{id}", method = RequestMethod.GET)
+    @ResponseBody
+    public List<Episode> getEpisodes(@PathVariable("id") long story_id){
+        Story story = service.getOne(story_id);
+        return new ArrayList<>(story.getEpisodes());
     }
 }

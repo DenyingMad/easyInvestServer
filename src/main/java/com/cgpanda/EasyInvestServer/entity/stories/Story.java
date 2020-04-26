@@ -1,7 +1,7 @@
 package com.cgpanda.EasyInvestServer.entity.stories;
 
 
-import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.*;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
@@ -33,15 +33,10 @@ public class Story {
     @LazyCollection(LazyCollectionOption.TRUE)
     private List<Episode> episodes;
 
-    @ManyToMany
-    @JoinTable(
-            name = "story_category",
-            joinColumns = @JoinColumn(name = "story_id"),
-            inverseJoinColumns = @JoinColumn(name = "category_id")
-    )
+    @ManyToMany(mappedBy = "stories")
     Set<StoryCategory> categories;
 
-    @JsonManagedReference
+    @JsonBackReference
     public Set<StoryCategory> getCategories() {
         return categories;
     }
@@ -50,7 +45,7 @@ public class Story {
         this.categories = categories;
     }
 
-    @JsonManagedReference
+    @JsonIgnore
     public List<Episode> getEpisodes() {
         return episodes;
     }
@@ -62,8 +57,8 @@ public class Story {
     public Story() {
     }
 
-    public Story(long id, String title, String image) {
-        this.story_id = id;
+    public Story(long story_id, String title, String image) {
+        this.story_id = story_id;
         this.story_title = title;
         this.story_image = image;
     }
@@ -99,4 +94,5 @@ public class Story {
     public void setFeatured(boolean featured) {
         isFeatured = featured;
     }
+
 }

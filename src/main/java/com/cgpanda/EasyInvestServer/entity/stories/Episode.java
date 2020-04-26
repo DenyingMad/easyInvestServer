@@ -2,6 +2,7 @@ package com.cgpanda.EasyInvestServer.entity.stories;
 
 import com.cgpanda.EasyInvestServer.entity.stories.Story;
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
@@ -26,7 +27,7 @@ public class Episode {
     @JoinColumn(name = "story_id")
     private Story story;
 
-    @JsonBackReference
+    @JsonIgnore
     public Story getStory() {
         return story;
     }

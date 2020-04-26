@@ -32,22 +32,7 @@ public class ReqController {
 
 
 
-    @RequestMapping(value = "/ep", method = RequestMethod.GET)
-    @ResponseBody
-    public List<Episode> getEpisodes(){
-        List<Episode> episodes = new ArrayList<>();
-        List<Story> storyList = storyService.getAll();
-        storyList.forEach( story -> episodes.addAll(story.getEpisodes()));
-        return episodes;
-    }
 
-
-    @RequestMapping(value = "/episodes/{id}", method = RequestMethod.GET)
-    @ResponseBody
-    public List<Episode> getEpisodes(@PathVariable("id") long story_id){
-        Story story = storyService.getOne(story_id);
-        return new ArrayList<>(story.getEpisodes());
-    }
 
     @RequestMapping(value = "/equities", method = RequestMethod.GET)
     @ResponseBody

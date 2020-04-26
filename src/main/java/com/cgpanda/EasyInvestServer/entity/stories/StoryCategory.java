@@ -1,6 +1,6 @@
 package com.cgpanda.EasyInvestServer.entity.stories;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.*;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
@@ -18,7 +18,12 @@ public class StoryCategory {
     @Column(name = "name")
     private String categoryName;
 
-    @ManyToMany(mappedBy = "categories")
+    @ManyToMany
+    @JoinTable(
+            name = "story_category",
+            joinColumns = @JoinColumn(name = "category_id"),
+            inverseJoinColumns = @JoinColumn(name = "story_id")
+    )
     private Set<Story> stories;
 
     public long getId() {
@@ -37,7 +42,7 @@ public class StoryCategory {
         this.categoryName = categoryName;
     }
 
-    @JsonBackReference
+    @JsonManagedReference
     public Set<Story> getStories() {
         return stories;
     }

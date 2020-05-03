@@ -40,7 +40,8 @@ public class StoriesController {
         return service.getCategories();
     }
 
-    @RequestMapping(value = "/categories", method = RequestMethod.GET)
+    @RequestMapping(value = "/categories/limited", method = RequestMethod.GET)
+    @ResponseBody
     public List<StoryCategory> getCategories(){
         return service.getSomeCategories();
     }

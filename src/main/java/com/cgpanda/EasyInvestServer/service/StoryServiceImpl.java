@@ -44,8 +44,8 @@ public class StoryServiceImpl implements StoryService {
     public List<StoryCategory> getSomeCategories() {
         List<StoryCategory> categoryList = new ArrayList<>();
         Optional<StoryCategory> category;
-        for (int i = 0; i < 3; i++){
-            category = categoryRepository.findById((long)1);
+        for (long i = 1; i < 4; i++){
+            category = categoryRepository.findById(i);
             categoryList.add(category.orElseGet(StoryCategory::new));
         }
         return categoryList;

@@ -46,7 +46,6 @@ public class StoriesController {
         return service.getSomeCategories();
     }
 
-
     @RequestMapping(value = "/episodes/{id}", method = RequestMethod.GET)
     @ResponseBody
     public List<Episode> getEpisodes(@PathVariable("id") long story_id){

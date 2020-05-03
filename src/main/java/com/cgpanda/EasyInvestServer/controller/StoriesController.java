@@ -40,14 +40,10 @@ public class StoriesController {
         return service.getCategories();
     }
 
-//    @RequestMapping(value = "/episodes", method = RequestMethod.GET)
-//    @ResponseBody
-//    public List<Episode> getEpisodes(){
-//        List<Episode> episodes = new ArrayList<>();
-//        List<Story> storyList = service.getAll();
-//        storyList.forEach( story -> episodes.addAll(story.getEpisodes()));
-//        return episodes;
-//    }
+    @RequestMapping(value = "/categories", method = RequestMethod.GET)
+    public List<StoryCategory> getCategories(){
+        return service.getSomeCategories();
+    }
 
 
     @RequestMapping(value = "/episodes/{id}", method = RequestMethod.GET)

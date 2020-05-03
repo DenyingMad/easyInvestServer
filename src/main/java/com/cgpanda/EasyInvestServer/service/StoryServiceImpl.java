@@ -7,6 +7,7 @@ import com.cgpanda.EasyInvestServer.repository.StoriesRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -37,6 +38,17 @@ public class StoryServiceImpl implements StoryService {
     @Override
     public List<StoryCategory> getCategories() {
         return categoryRepository.findAll();
+    }
+
+    @Override
+    public List<StoryCategory> getSomeCategories() {
+        List<StoryCategory> categoryList = new ArrayList<>();
+        Optional<StoryCategory> category;
+        for (int i = 0; i < 3; i++){
+            category = categoryRepository.findById((long)1);
+            categoryList.add(category.orElseGet(StoryCategory::new));
+        }
+        return categoryList;
     }
 
 

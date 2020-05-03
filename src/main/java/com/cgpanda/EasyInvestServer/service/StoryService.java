@@ -13,4 +13,6 @@ public interface StoryService {
     Story getOne(long story_id);
 
     List<StoryCategory> getCategories();
+
+    List<StoryCategory> getSomeCategories();
 }

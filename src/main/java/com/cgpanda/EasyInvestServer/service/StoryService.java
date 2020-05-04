@@ -14,5 +14,4 @@ public interface StoryService {
 
     List<StoryCategory> getCategories();
 
-    List<StoryCategory> getSomeCategories();
 }

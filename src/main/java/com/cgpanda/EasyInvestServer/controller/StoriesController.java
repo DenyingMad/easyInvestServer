@@ -40,16 +40,11 @@ public class StoriesController {
         return service.getCategories();
     }
 
-    @RequestMapping(value = "/categories/limited", method = RequestMethod.GET)
-    @ResponseBody
-    public List<StoryCategory> getCategories(){
-        return service.getSomeCategories();
-    }
-
     @RequestMapping(value = "/episodes/{id}", method = RequestMethod.GET)
     @ResponseBody
     public List<Episode> getEpisodes(@PathVariable("id") long story_id){
         Story story = service.getOne(story_id);
         return new ArrayList<>(story.getEpisodes());
     }
+
 }

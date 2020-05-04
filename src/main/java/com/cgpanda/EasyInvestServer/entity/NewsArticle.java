@@ -6,7 +6,7 @@ import javax.persistence.*;
 
 @Table(name = "articles")
 @Entity
-public class Article {
+public class NewsArticle {
 
     @Id
     @GeneratedValue(generator = "increment")

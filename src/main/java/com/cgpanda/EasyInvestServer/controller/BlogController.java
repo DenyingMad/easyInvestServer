@@ -1,6 +1,7 @@
 package com.cgpanda.EasyInvestServer.controller;
 
 import com.cgpanda.EasyInvestServer.entity.Blog.Article;
+import com.cgpanda.EasyInvestServer.entity.Blog.Quote;
 import com.cgpanda.EasyInvestServer.service.BlogService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -24,6 +25,12 @@ public class BlogController {
             @RequestParam(defaultValue = "0") Integer sort)
     {
         return service.getArticles(page, sort);
+    }
+
+    @RequestMapping("/random-quote")
+    @ResponseBody
+    public Quote getRandomQuote(){
+        return service.getRandomQuote();
     }
 
 }

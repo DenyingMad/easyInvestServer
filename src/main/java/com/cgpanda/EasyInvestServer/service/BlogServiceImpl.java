@@ -1,7 +1,9 @@
 package com.cgpanda.EasyInvestServer.service;
 
 import com.cgpanda.EasyInvestServer.entity.Blog.Article;
+import com.cgpanda.EasyInvestServer.entity.Blog.Quote;
 import com.cgpanda.EasyInvestServer.repository.BlogRepository;
+import com.cgpanda.EasyInvestServer.repository.QuotesRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -16,7 +18,9 @@ import java.util.List;
 public class BlogServiceImpl implements BlogService {
 
     @Autowired
-    private BlogRepository repository;
+    private BlogRepository blogRepository;
+    @Autowired
+    private QuotesRepository quotesRepository;
 
     @Override
     public List<Article> getArticles(int page, int sort) {
@@ -30,15 +34,15 @@ public class BlogServiceImpl implements BlogService {
         switch (sort) {
             case 0:
                 paging = PageRequest.of(page, 10, Sort.by(Sort.Direction.DESC, "relevance"));
-                articlePage = repository.findAll(paging);
+                articlePage = blogRepository.findAll(paging);
                 break;
             case 1:
                 paging = PageRequest.of(page, 10, Sort.by(Sort.Direction.DESC, "postDate"));
-                articlePage = repository.findAll(paging);
+                articlePage = blogRepository.findAll(paging);
                 break;
             case -1:
                 paging = PageRequest.of(page, 10, Sort.by(Sort.Direction.ASC, "postDate"));
-                articlePage = repository.findAll(paging);
+                articlePage = blogRepository.findAll(paging);
                 break;
         }
 
@@ -46,5 +50,12 @@ public class BlogServiceImpl implements BlogService {
             return articlePage.getContent();
         else
             return new ArrayList<Article>();
+    }
+
+    @Override
+    public Quote getRandomQuote() {
+        long max = quotesRepository.countAllQuotes();
+        long a = (long) (Math.random() * max);
+        return quotesRepository.findById(a).orElseGet(()-> new Quote(-1, "Don't work", "Danny"));
     }
 }

@@ -35,7 +35,7 @@ public class LoginController {
 
     @RequestMapping(value = "/update-api-key", method = RequestMethod.GET)
     public @ResponseBody String updateApiKey(@RequestParam String email){
-        return updateApiKey(email);
+        return service.updateApi(email);
     }
 
     private String[] splitHash(String hash){

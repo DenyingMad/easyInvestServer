@@ -29,7 +29,7 @@ public class LoginController {
     }
 
     @RequestMapping(value = "/sign-in", method = RequestMethod.GET)
-    public @ResponseBody String signIn(@RequestBody String email){
+    public @ResponseBody String signIn(@RequestParam String email){
         return service.authUser(email);
     }
 

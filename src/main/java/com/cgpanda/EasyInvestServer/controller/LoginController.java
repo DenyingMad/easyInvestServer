@@ -21,10 +21,19 @@ public class LoginController {
 
     @RequestMapping(value = "/register", method = RequestMethod.POST)
     public @ResponseBody ApiKey registerUser(@RequestBody User userCredentials){
-        String hash = userCredentials.getPassword();
-        String[] parts = hash.split(":");
+        String[] parts = splitHash(userCredentials.getPassword());
+
         userCredentials.setSalt(parts[0]);
         userCredentials.setPassword(parts[1]);
         return service.registerUser(userCredentials);
+    }
+
+    @RequestMapping(value = "/sign-in", method = RequestMethod.GET)
+    public @ResponseBody String signIn(@RequestBody String email){
+        return service.authUser(email);
+    }
+
+    private String[] splitHash(String hash){
+        return hash.split(":");
     }
 }

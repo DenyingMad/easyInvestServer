@@ -6,4 +6,5 @@ import com.cgpanda.EasyInvestServer.entity.Users.User;
 public interface LoginService {
     boolean checkEmail(String email);
     ApiKey registerUser(User user);
+    String authUser(String email);
 }

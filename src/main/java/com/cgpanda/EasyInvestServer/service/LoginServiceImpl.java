@@ -32,4 +32,13 @@ public class LoginServiceImpl implements LoginService{
         loginRepository.saveAndFlush(user);
         return apiKey;
     }
+
+    @Override
+    public String authUser(String email) {
+        User user = loginRepository.findUserByEmail(email).orElseGet(User::new);
+        if (user.getPassword() != null && user.getSalt() != null){
+            return user.getSalt() + ":" + user.getPassword();
+        } else
+            return ":";
+    }
 }

@@ -39,6 +39,6 @@ public class LoginServiceImpl implements LoginService{
         if (user.getPassword() != null && user.getSalt() != null){
             return user.getSalt() + ":" + user.getPassword();
         } else
-            return ":";
+            return ".";
     }
 }

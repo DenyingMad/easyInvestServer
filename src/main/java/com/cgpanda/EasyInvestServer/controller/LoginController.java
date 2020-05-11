@@ -33,6 +33,11 @@ public class LoginController {
         return service.authUser(email);
     }
 
+    @RequestMapping(value = "/update-api-key", method = RequestMethod.GET)
+    public @ResponseBody String updateApiKey(@RequestParam String email){
+        return updateApiKey(email);
+    }
+
     private String[] splitHash(String hash){
         return hash.split(":");
     }

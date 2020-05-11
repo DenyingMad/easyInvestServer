@@ -7,4 +7,5 @@ public interface LoginService {
     boolean checkEmail(String email);
     ApiKey registerUser(User user);
     String authUser(String email);
+    String updateApi(String email);
 }

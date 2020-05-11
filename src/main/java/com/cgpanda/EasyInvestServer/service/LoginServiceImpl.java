@@ -10,7 +10,7 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class LoginServiceImpl implements LoginService{
-    private final ApiGenerator apiGenerator = new ApiGenerator();
+
     @Autowired
     LoginRepository loginRepository;
     @Autowired
@@ -24,7 +24,7 @@ public class LoginServiceImpl implements LoginService{
 
     @Override
     public ApiKey registerUser(User user) {
-        String generatedApi = apiGenerator.getApiKey();
+        String generatedApi = ApiGenerator.getApiKey();
         ApiKey apiKey = new ApiKey();
         apiKey.setApiKey(generatedApi);
         apiRepository.saveAndFlush(apiKey);
@@ -40,5 +40,13 @@ public class LoginServiceImpl implements LoginService{
             return user.getSalt() + ":" + user.getPassword();
         } else
             return ".";
+    }
+
+    @Override
+    public String updateApi(String email) {
+        User user = loginRepository.findUserByEmail(email).orElseGet(User::new);
+        String generatedApi = ApiGenerator.getApiKey();
+        apiRepository.updateApiKey(user.getApiKey().getId(), generatedApi);
+        return generatedApi;
     }
 }

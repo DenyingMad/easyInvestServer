@@ -7,7 +7,7 @@ import java.security.NoSuchAlgorithmException;
 
 public class ApiGenerator {
 
-    private String apiKey;
+    private static String apiKey;
 
     private static String generateApi() throws NoSuchAlgorithmException {
         KeyGenerator keyGenerator = KeyGenerator.getInstance("AES");
@@ -17,7 +17,7 @@ public class ApiGenerator {
         return DatatypeConverter.printHexBinary(encoded).toLowerCase();
     }
 
-    public String getApiKey() {
+    public static String getApiKey() {
         try {
             setApiKey(generateApi());
         } catch (NoSuchAlgorithmException e) {
@@ -26,7 +26,7 @@ public class ApiGenerator {
         return apiKey;
     }
 
-    private void setApiKey(String apiKey) {
-        this.apiKey = apiKey;
+    private static void setApiKey(String newApiKey) {
+        apiKey = newApiKey;
     }
 }

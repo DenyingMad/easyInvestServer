@@ -1,5 +1,6 @@
 package com.cgpanda.EasyInvestServer.controller;
 
+import com.cgpanda.EasyInvestServer.entity.Users.ApiKey;
 import com.cgpanda.EasyInvestServer.entity.Users.User;
 import com.cgpanda.EasyInvestServer.service.LoginService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,7 +20,7 @@ public class LoginController {
     }
 
     @RequestMapping(value = "/register", method = RequestMethod.POST)
-    public @ResponseBody String registerUser(@RequestBody User userCredentials){
+    public @ResponseBody ApiKey registerUser(@RequestBody User userCredentials){
         String hash = userCredentials.getPassword();
         String[] parts = hash.split(":");
         userCredentials.setSalt(parts[0]);

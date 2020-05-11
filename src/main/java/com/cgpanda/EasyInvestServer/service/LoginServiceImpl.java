@@ -23,13 +23,13 @@ public class LoginServiceImpl implements LoginService{
     }
 
     @Override
-    public String registerUser(User user) {
+    public ApiKey registerUser(User user) {
         String generatedApi = apiGenerator.getApiKey();
         ApiKey apiKey = new ApiKey();
         apiKey.setApiKey(generatedApi);
         apiRepository.saveAndFlush(apiKey);
         user.setApiKey(apiKey);
         loginRepository.saveAndFlush(user);
-        return generatedApi;
+        return apiKey;
     }
 }

@@ -1,6 +1,7 @@
 package com.cgpanda.EasyInvestServer.entity.Users;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
@@ -19,6 +20,9 @@ public class ApiKey {
 
     @OneToOne(mappedBy = "apiKey")
     private User user;
+
+    @Column(name = "portfolio_id")
+    private long portfolioId;
 
     public long getId() {
         return id;
@@ -43,5 +47,14 @@ public class ApiKey {
 
     public void setUser(User user) {
         this.user = user;
+    }
+
+    @JsonIgnore
+    public long getPortfolioId() {
+        return portfolioId;
+    }
+
+    public void setPortfolioId(long portfolioId) {
+        this.portfolioId = portfolioId;
     }
 }

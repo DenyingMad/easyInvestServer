@@ -8,6 +8,8 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Optional;
+
 @Repository
 public interface ApiRepository extends JpaRepository<ApiKey, Long> {
 
@@ -15,4 +17,6 @@ public interface ApiRepository extends JpaRepository<ApiKey, Long> {
     @Transactional
     @Query("update ApiKey a set a.apiKey = ?2 where a.id = ?1")
     void updateApiKey(@Param("id") Long id, @Param("api") String newApi);
+
+    Optional<ApiKey> findByApiKey(String apiKey);
 }
